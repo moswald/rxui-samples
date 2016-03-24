@@ -3,11 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:DesignTime="using:ReactiveReader.Core.ViewModels.DesignTime"
+    xmlns:designTime="using:ReactiveReader.Core.ViewModels.DesignTime"
     xmlns:viewModels="using:ReactiveReader.Core.ViewModels"
     xmlns:views="using:ReactiveReader.UWP.Views"
     x:Class="ReactiveReader.UWP.Views.FeedsView"
-    mc:Ignorable="d" d:DataContext="{d:DesignInstance DesignTime:DesignTimeFeedsViewModel, IsDesignTimeCreatable=True}">
+    mc:Ignorable="d" d:DataContext="{d:DesignInstance designTime:DesignTimeFeedsViewModel, IsDesignTimeCreatable=True}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Pivot x:Name="Pivot"
