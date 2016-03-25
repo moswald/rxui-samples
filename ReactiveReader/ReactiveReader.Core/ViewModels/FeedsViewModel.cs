@@ -15,9 +15,11 @@ namespace ReactiveReader.Core.ViewModels
         ReactiveCommand<Unit> RemoveBlog { get; }
         ReactiveCommand<Unit> AddBlog { get; }
         ReactiveCommand<Unit> PersistData { get; }
-        ReactiveList<BlogViewModel> Blogs { get; }
+        ReactiveList<IBlogViewModel> Blogs { get; }
         ReactiveCommand<Unit> RefreshAll { get; }
         bool IsLoading { get; }
+
+        IBlogViewModel SelectedBlog { get; }
     }
 
     public class FeedsViewModel : ReactiveObject, IFeedsViewModel
@@ -28,7 +30,7 @@ namespace ReactiveReader.Core.ViewModels
         {
             Cache = cache ?? Locator.Current.GetService<IBlobCache>();
 
-            Cache.GetOrCreateObject(BlobCacheKeys.Blogs, () => new ReactiveList<BlogViewModel>())
+            Cache.GetOrCreateObject(BlobCacheKeys.Blogs, () => new ReactiveList<IBlogViewModel>())
                 .Subscribe(blogs => { Blogs = blogs; });
 
             RefreshAll = ReactiveCommand.CreateAsyncTask(x =>
@@ -74,15 +76,15 @@ namespace ReactiveReader.Core.ViewModels
         public ReactiveCommand<Unit> PersistData { get; }
         public ReactiveCommand<Unit> RefreshAll { get; }
 
-        ReactiveList<BlogViewModel> _blogs;
-        public ReactiveList<BlogViewModel> Blogs
+        ReactiveList<IBlogViewModel> _blogs;
+        public ReactiveList<IBlogViewModel> Blogs
         {
             get { return _blogs; }
             private set { this.RaiseAndSetIfChanged(ref _blogs, value); }
         }
 
-        BlogViewModel _selectedBlog;
-        public BlogViewModel SelectedBlog
+        IBlogViewModel _selectedBlog;
+        public IBlogViewModel SelectedBlog
         {
             get { return _selectedBlog; }
             set { this.RaiseAndSetIfChanged(ref _selectedBlog, value); }
